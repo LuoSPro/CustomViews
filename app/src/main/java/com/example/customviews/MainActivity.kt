@@ -14,23 +14,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mHandle = Handler(Looper.getMainLooper())
-        initLoadingView58()
+        initColorTrackText()
     }
 
-    private fun initLoadingView58() {
-        changeLoadingStatus(LoadingView58.Status.CIRCLE,0);
-        changeLoadingStatus(LoadingView58.Status.TRIANGLE,1000);
-        changeLoadingStatus(LoadingView58.Status.RECTANGLE,2000);
-    }
-
-    private lateinit var mHandle: Handler
-
-    private fun changeLoadingStatus(status: LoadingView58.Status, time: Long ) {
-        mHandle.postDelayed(object : Runnable{
-            override fun run() {
-                loading_view.setStatus(status)
+    private fun initColorTrackText() {
+        val valueAnimator: ValueAnimator = ObjectAnimator.ofFloat(0f,1f)
+        valueAnimator.duration = 2000
+        btn_left_to_right.setOnClickListener {
+            color_track_text.setDirection(ColorTrackTextView.Direction.LEFT_TO_RIGHT)
+            valueAnimator.addUpdateListener {
+                color_track_text.setCurProgress(valueAnimator.animatedValue as Float)
             }
-        },time)
+            valueAnimator.start()
+        }
+        btn_right_to_left.setOnClickListener {
+            color_track_text.setDirection(ColorTrackTextView.Direction.RIGHT_TO_LEFT)
+            valueAnimator.addUpdateListener {
+                color_track_text.setCurProgress(valueAnimator.animatedValue as Float)
+            }
+            valueAnimator.start()
+        }
     }
 }
