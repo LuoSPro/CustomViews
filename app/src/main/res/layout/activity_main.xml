@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:gravity="center"
     android:orientation="vertical">
 
     <com.example.customviews.QQExerciseSteps
+        android:visibility="gone"
         android:id="@+id/step_view"
         app:outerColor="@color/colorPrimary"
         app:innerColor="@color/colorAccent"
@@ -17,5 +17,100 @@
         app:stepTextColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <com.example.customviews.DynamicProgress
+        android:visibility="gone"
+        android:id="@+id/progress_view"
+        app:ProgressColor="@color/colorPrimary"
+        app:RoundColor="@color/colorAccent"
+        app:RoundWidth="30dp"
+        app:ProgressTextColor="@color/colorPrimary"
+        app:ProgressTextSize="26sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.example.customviews.LoadingView58
+        android:visibility="gone"
+        app:CircleColor="@color/colorPrimary"
+        app:RectangleColor="@color/colorAccent"
+        app:TriangleColor="@color/colorAccent"
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.example.customviews.ColorTrackTextView
+            android:id="@+id/color_track_text"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:originColor="@color/colorPrimary"
+            app:changeColor="@color/colorAccent"
+            android:text="Hello World!!!!"/>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_left_to_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="LEFT_TO_RIGHT"/>
+
+            <Button
+                android:id="@+id/btn_right_to_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RIGHT_TO_LEFT"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_letter"
+            android:text="A"
+            android:textSize="16sp"
+            android:textColor="#FF005E"
+            android:background="#DFDFDF"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <com.example.customviews.LetterSideBar
+            android:id="@+id/letter_side_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingStart="20dp"
+            app:LetterColor="@color/colorPrimary"
+            app:SelectedLetterColor="@color/colorAccent"
+            app:LetterSize="16sp"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="皮肤"/>
+
+
 
 </LinearLayout>
