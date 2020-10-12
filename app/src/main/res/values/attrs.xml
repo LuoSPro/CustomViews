@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="QQExerciseSteps">
+        <attr name="outerColor" format="color"/>
+        <attr name="innerColor" format="color"/>
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="stepTextSize" format="dimension"/>
+        <attr name="stepTextColor" format="color"/>
+    </declare-styleable>
+    
+    <declare-styleable name="DynamicProgress">
+        <attr name="RoundColor" format="color"/>
+        <attr name="ProgressColor" format="color"/>
+        <attr name="RoundWidth" format="dimension"/>
+        <attr name="ProgressTextSize" format="dimension"/>
+        <attr name="ProgressTextColor" format="color"/>
+    </declare-styleable>
+    
+    <declare-styleable name="LoadingView58">
+        <attr name="CircleColor" format="color"/>
+        <attr name="TriangleColor" format="color"/>
+        <attr name="RectangleColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ColorTrackTextView">
+        <attr name="originColor" format="color"/>
+        <attr name="changeColor" format="color"/>
+    </declare-styleable>
+    
+    <declare-styleable name="LetterSideBar">
+        <attr name="LetterSize" format="dimension"/>
+        <attr name="LetterColor" format="color"/>
+        <attr name="SelectedLetterColor" format="color"/>
+    </declare-styleable>
+</resources>
