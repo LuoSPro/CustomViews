@@ -8,14 +8,9 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.example.customviews.QQExerciseSteps
-        android:id="@+id/step_view"
-        app:outerColor="@color/colorPrimary"
-        app:innerColor="@color/colorAccent"
-        app:borderWidth="6dp"
-        app:stepTextSize="26sp"
-        app:stepTextColor="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+   <Button
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="这是一个按钮"/>
 
 </LinearLayout>

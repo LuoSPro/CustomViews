@@ -2,37 +2,50 @@ package com.example.customviews
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.widget.TextView
+import androidx.core.view.LayoutInflaterCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val layoutInflater = LayoutInflater.from(this)
+        LayoutInflaterCompat.setFactory2(layoutInflater,object : LayoutInflater.Factory2{
+            override fun onCreateView(
+                parent: View?,
+                name: String,
+                context: Context,
+                attrs: AttributeSet
+            ): View? {
+                //拦截到View的创建
+                if (name == "Button"){
+                    val textView = TextView(this@MainActivity)
+                    textView.text = "被拦截了"
+                    return textView
+                }
+                return null
+            }
+
+            override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+                //拦截到View的创建
+                if (name == "Button"){
+                    val textView = TextView(this@MainActivity)
+                    textView.text = "被拦截了"
+                    return textView
+                }
+                return null
+            }
+        })
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initQQStepView()
-    }
-
-    private fun initQQStepView() {
-        step_view.apply {
-            setStepMax(4000)
-        }
-
-        //属性动画
-        val valueAnimator = ObjectAnimator.ofFloat(0f, 3000f)
-        valueAnimator.apply {
-            duration = 1000
-            interpolator = DecelerateInterpolator()
-            addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
-                override fun onAnimationUpdate(animation: ValueAnimator?) {
-                    //这里只能先转成Float，直接先转成Int会崩掉
-                    val curStep: Float = animation?.animatedValue as Float
-                    step_view.setCurStep(curStep.toInt())
-                }
-            })
-            start()
-        }
     }
 }
