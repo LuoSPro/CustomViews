@@ -8,14 +8,15 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.example.customviews.QQExerciseSteps
-        android:id="@+id/step_view"
-        app:outerColor="@color/colorPrimary"
-        app:innerColor="@color/colorAccent"
-        app:borderWidth="6dp"
-        app:stepTextSize="26sp"
-        app:stepTextColor="@color/colorPrimary"
+    <com.example.customviews.DynamicProgress
+        android:id="@+id/progress_view"
+        app:ProgressColor="@color/colorPrimary"
+        app:RoundColor="@color/colorAccent"
+        app:RoundWidth="30dp"
+        app:ProgressTextColor="@color/colorPrimary"
+        app:ProgressTextSize="26sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 
 </LinearLayout>
