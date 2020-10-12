@@ -8,43 +8,32 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.example.customviews.ColorTrackTextView
-            android:id="@+id/color_track_text"
-            android:textSize="20sp"
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_letter"
+            android:text="A"
+            android:textSize="16sp"
+            android:textColor="#FF005E"
+            android:background="#DFDFDF"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <com.example.customviews.LetterSideBar
+            android:id="@+id/letter_side_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:originColor="@color/colorPrimary"
-            app:changeColor="@color/colorAccent"
-            android:text="Hello World!!!!"/>
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingStart="20dp"
+            app:LetterColor="@color/colorPrimary"
+            app:SelectedLetterColor="@color/colorAccent"
+            app:LetterSize="16sp"/>
 
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/btn_left_to_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="LEFT_TO_RIGHT"/>
-
-            <Button
-                android:id="@+id/btn_right_to_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RIGHT_TO_LEFT"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </LinearLayout>
