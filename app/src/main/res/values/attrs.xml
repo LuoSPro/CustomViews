@@ -32,4 +32,10 @@
         <attr name="LetterColor" format="color"/>
         <attr name="SelectedLetterColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="TextFlowLayout">
+        <attr name="TextLines" format="dimension"/>
+        <attr name="TextColor" format="color"/>
+        <attr name="TextSize" format="dimension"/>
+    </declare-styleable>
 </resources>
