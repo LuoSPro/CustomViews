@@ -8,11 +8,14 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.example.customviews.LoadingView58
-        app:CircleColor="@color/colorPrimary"
-        app:RectangleColor="@color/colorAccent"
-        app:TriangleColor="@color/colorAccent"
-        android:id="@+id/loading_view"
+    <com.example.customviews.DynamicProgress
+        android:visibility="gone"
+        android:id="@+id/progress_view"
+        app:ProgressColor="@color/colorPrimary"
+        app:RoundColor="@color/colorAccent"
+        app:RoundWidth="30dp"
+        app:ProgressTextColor="@color/colorPrimary"
+        app:ProgressTextSize="26sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
