@@ -32,4 +32,8 @@
         <attr name="LetterColor" format="color"/>
         <attr name="SelectedLetterColor" format="color"/>
     </declare-styleable>
+    
+    <declare-styleable name="SlidingMenu">
+        <attr name="menuMarginRight" format="dimension"/>
+    </declare-styleable>
 </resources>
