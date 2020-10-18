@@ -22,33 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val layoutInflater = LayoutInflater.from(this)
-        LayoutInflaterCompat.setFactory2(layoutInflater,object : LayoutInflater.Factory2{
-            override fun onCreateView(
-                parent: View?,
-                name: String,
-                context: Context,
-                attrs: AttributeSet
-            ): View? {
-                //拦截到View的创建
-                if (name == "Button"){
-                    val textView = TextView(this@MainActivity)
-                    textView.text = "被拦截了"
-                    return textView
-                }
-                return null
-            }
-
-            override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-                //拦截到View的创建
-                if (name == "Button"){
-                    val textView = TextView(this@MainActivity)
-                    textView.text = "被拦截了"
-                    return textView
-                }
-                return null
-            }
-        })
+//        changeSkin()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -63,6 +37,36 @@ class MainActivity : AppCompatActivity() {
 //        LayoutInflater.from(this).inflate(R.layout.activity_main,null)
 //        LayoutInflater.from(this).inflate(R.layout.activity_main,null,false)
 
+    }
+
+    private fun changeSkin() {
+        val layoutInflater = LayoutInflater.from(this)
+        LayoutInflaterCompat.setFactory2(layoutInflater, object : LayoutInflater.Factory2 {
+            override fun onCreateView(
+                parent: View?,
+                name: String,
+                context: Context,
+                attrs: AttributeSet
+            ): View? {
+                //拦截到View的创建
+                if (name == "Button") {
+                    val textView = TextView(this@MainActivity)
+                    textView.text = "被拦截了"
+                    return textView
+                }
+                return null
+            }
+
+            override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+                //拦截到View的创建
+                if (name == "Button") {
+                    val textView = TextView(this@MainActivity)
+                    textView.text = "被拦截了"
+                    return textView
+                }
+                return null
+            }
+        })
     }
 
     private fun initLetterSideBar() {
