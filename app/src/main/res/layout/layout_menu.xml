@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/pic4">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/user_write_paint"
                     android:text="请登录"
-                    android:textColor="#E4E4E4"
+                    android:textColor="#000000"
                     android:textSize="18dp" />
 
                 <LinearLayout
@@ -50,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
                         android:text="关注 0"
-                        android:textColor="#CFCFCF"
+                        android:textColor="#000000"
                         android:textSize="12dp" />
 
                     <TextView
@@ -59,7 +60,7 @@
                         android:layout_marginLeft="40dp"
                         android:drawablePadding="10dp"
                         android:text="粉丝 0"
-                        android:textColor="#C3C3C3"
+                        android:textColor="#000000"
                         android:textSize="12dp" />
 
                 </LinearLayout>

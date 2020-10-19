@@ -1,20 +1,18 @@
 package com.example.customviews;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.RelativeLayout;
 
-import androidx.core.view.ViewCompat;
-
-public class SlidingMenu extends HorizontalScrollView {
+public class QQSlidingMenu extends HorizontalScrollView {
 
     private static final String TAG = "SlidingMenu";
 
@@ -22,6 +20,7 @@ public class SlidingMenu extends HorizontalScrollView {
     private int mMenuWidth;
     private View mMenuView;
     private View mContentView;
+    private View mShadowView;
 
     //判断当前菜单栏是否打开
     private boolean isMenuOpen = false;
@@ -31,18 +30,19 @@ public class SlidingMenu extends HorizontalScrollView {
 
     //判断当前事件是否被拦截
     private boolean isIntercept = false;
-    private float contentScale;
     private float mContentScale1;
+    //方法一：(能实现功能，但在架构方面不行)
+//    private ScaleChangeListener mScaleChangeListener;
 
-    public SlidingMenu(Context context) {
+    public QQSlidingMenu(Context context) {
         this(context,null);
     }
 
-    public SlidingMenu(Context context, AttributeSet attrs) {
+    public QQSlidingMenu(Context context, AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public SlidingMenu(Context context, AttributeSet attrs, int defStyleAttr) {
+    public QQSlidingMenu(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(R.styleable.SlidingMenu);
         mMenuMarginRight = (int) ta.getDimension(R.styleable.SlidingMenu_menuMarginRight,dp2px(mMenuMarginRight));
@@ -53,14 +53,14 @@ public class SlidingMenu extends HorizontalScrollView {
     }
 
     //添加手势事件处理
-    private GestureDetector.OnGestureListener mGestureListener = new GestureDetector.SimpleOnGestureListener(){
+    private OnGestureListener mGestureListener = new GestureDetector.SimpleOnGestureListener(){
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             //只关注快速滑动
             //当手势为左右快速滑动是，则切换状态
             if(Math.abs(velocityX) < Math.abs(velocityY)){
                 //上下滑动的距离大于左右滑动的距离 代表当前为上下滑动
-                //此时不处理
+                //此时不处理，如果这里不返回回去，那么
                 return super.onFling(e1, e2, velocityX, velocityY);
             }
             //当velocityX > 0  代表右滑  velocityX < 0 代表左滑
@@ -71,6 +71,7 @@ public class SlidingMenu extends HorizontalScrollView {
                     return true;
                 }
             }else {
+                //关闭时，往右边快速滑动切换，打开菜单栏，
                 if(velocityX > 0){
                     openMenu();
                     return true;
@@ -113,9 +114,22 @@ public class SlidingMenu extends HorizontalScrollView {
 
         //设置ContentView的宽度   这里为全屏显示
         mContentView = container.getChildAt(1);
+        //方法二：1.把布局单独提取出来：
+        container.removeView(mContentView);
         ViewGroup.LayoutParams contentParams = mContentView.getLayoutParams();
+        //方法二：2.然后在外面套一层阴影
+        Context context = getContext();
+        RelativeLayout contentContainer = new RelativeLayout(context);
+        contentContainer.addView(mContentView);
+        mShadowView = new View(context);
+        mShadowView.setBackgroundColor(Color.parseColor("#55000000"));
+        contentContainer.addView(mShadowView);
+        //方法二：3.最后把容器放回原来的位置
         contentParams.width = ScreenUtils.getScreenWidth(getContext());
-        mContentView.setLayoutParams(contentParams);
+//        mContentView.setLayoutParams(contentParams);
+        contentContainer.setLayoutParams(contentParams);
+        container.addView(contentContainer);
+
     }
 
     /**
@@ -129,26 +143,38 @@ public class SlidingMenu extends HorizontalScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-        //以0.7为基数 缩放contentView
-        mContentScale1 = (float) (0.7 + 0.3 * l*1f/mMenuView.getMeasuredWidth());
-        //设置轴心坐标
-        mContentView.setPivotX(0);
-        mContentView.setPivotY(mContentView.getMeasuredHeight()/2);
-        //设置缩放比例
-        mContentView.setScaleX(mContentScale1);
-        mContentView.setScaleY(mContentScale1);
+        float scale = l * 1f / mMenuView.getMeasuredWidth();
 
-        //给MenuView设置渐变 基数为0.5
-        float menuAlpha = (float) (1 - 0.5*l*1f/mMenuView.getMeasuredWidth());
-        //设置透明度
-        mMenuView.setAlpha(menuAlpha);
-        //给MenuView设置缩放
-        float menuScale = (float) (1 - 0.3 * l * 1f/mMenuView.getMeasuredWidth());
-        mMenuView.setScaleX(menuScale);
-        mMenuView.setScaleY(menuScale);
+        //方法一：通知外面改变阴影的透明度(能实现功能，但在架构方面不行)
+//        if (mScaleChangeListener != null) {
+//            mScaleChangeListener.onScaleChange(1 - scale);
+//        }
 
-        //设置menuView的抽屉效果（移动）
-        mMenuView.setTranslationX(0.25f*l);
+        //方法二：控制阴影  0~1
+        mShadowView.setAlpha(1 - scale);
+
+        //这里不用再缩放了，因为这个效果不需要缩放效果了，只需要滑动了
+//        //以0.7为基数 缩放contentView
+//        mContentScale1 = (float) (0.7 + 0.3 * scale);
+//        //设置轴心坐标
+//        mContentView.setPivotX(0);
+//        mContentView.setPivotY(mContentView.getMeasuredHeight()/2);
+//        //设置缩放比例
+//        mContentView.setScaleX(mContentScale1);
+//        mContentView.setScaleY(mContentScale1);
+//
+//        //给MenuView设置渐变 基数为0.5
+//        float menuAlpha = (float) (1 - 0.5*l*1f/mMenuView.getMeasuredWidth());
+//        //设置透明度
+//        mMenuView.setAlpha(menuAlpha);
+//        //给MenuView设置缩放
+//        float menuScale = (float) (1 - 0.3 * l * 1f/mMenuView.getMeasuredWidth());
+//        mMenuView.setScaleX(menuScale);
+//        mMenuView.setScaleY(menuScale);
+//
+//        //设置menuView的抽屉效果（移动）
+//        //这里设置的是，两个布局重叠的部分，0.15就一点点，0.7就会重叠很大一部分
+        mMenuView.setTranslationX(0.5f*l);
     }
 
     /**
@@ -181,6 +207,7 @@ public class SlidingMenu extends HorizontalScrollView {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        //如果这里不调用scrollTo，那么我们刚开始的页面会出现，同时存在的情况，所以我们应该模拟滑动，使菜单栏呈现关闭的效果
         scrollTo(mMenuWidth,0);
     }
 
@@ -211,9 +238,12 @@ public class SlidingMenu extends HorizontalScrollView {
 //            Log.d(TAG, "onInterceptTouchEvent: TOP ==> " + top);
 //            Log.d(TAG, "onInterceptTouchEvent: bottom ==> " + bottom);
             //当触摸的位置在菜单栏之外的时候，关闭菜单栏
-            if(x > mMenuView.getMeasuredWidth() && y > top && y < bottom){
+            if(x > mMenuView.getMeasuredWidth()){
+                //关闭菜单
                 closeMenu();
                 isIntercept = true;
+                //子View不需要响应任何事件（点击和触摸），拦截子View事件
+                //返回true，代表我会拦截子View的事件，但是会响应自己的onTouch事件，所以应该给onTouch事件的时候设置一个标记
                 return true;
             }
         }
@@ -225,4 +255,13 @@ public class SlidingMenu extends HorizontalScrollView {
         float scale = getResources().getSystem().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5);
     }
+
+    //方法一：(能实现功能，但在架构方面不行)
+//    public void setScaleChangeListener(ScaleChangeListener listener){
+//        this.mScaleChangeListener = listener;
+//    }
+//
+//    public interface ScaleChangeListener{
+//        void onScaleChange(float scale);
+//    }
 }
