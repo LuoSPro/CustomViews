@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.customviews.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
-    android:background="@drawable/home_menu_bg"
     app:menuMarginRight="150dp"
     android:overScrollMode="never">
 
-    <LinearLayout
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/success_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lock_pattern_view"
+        android:textSize="20sp"
+        android:textColor="#236502"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"/>
 
-        <include layout="@layout/layout_menu"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/failed_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lock_pattern_view"
+        android:textSize="20sp"
+        android:textColor="#AC021B"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"/>
 
-        <include layout="@layout/layout_content"/>
+    <com.example.customviews.LockPatternView
+        android:id="@+id/lock_pattern_view"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"/>
 
-    </LinearLayout>
 
-</com.example.customviews.SlidingMenu>
+</RelativeLayout>
