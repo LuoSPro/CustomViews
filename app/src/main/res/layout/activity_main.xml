@@ -1,22 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.customviews.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
-    android:background="@drawable/home_menu_bg"
-    app:menuMarginRight="150dp"
-    android:overScrollMode="never">
+    android:layout_height="match_parent">
+
+
+    <com.example.customviews.MyScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_view"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="text"
+                android:gravity="center"
+                android:layout_height="400dp"/>
+
+
+
+        </LinearLayout>
+    </com.example.customviews.MyScrollView>
 
     <LinearLayout
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:background="@android:color/holo_blue_dark">
 
-        <include layout="@layout/layout_menu"/>
-
-        <include layout="@layout/layout_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="头部" />
 
     </LinearLayout>
 
-</com.example.customviews.SlidingMenu>
+</RelativeLayout>
